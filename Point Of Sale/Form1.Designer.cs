@@ -35,22 +35,17 @@
             this.Close_Bill = new System.Windows.Forms.Button();
             this.Barcode = new System.Windows.Forms.TextBox();
             this.Orders_vis = new System.Windows.Forms.DataGridView();
+            this.ordersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.point_Of_SaleDataSet1 = new Point_Of_Sale.Point_Of_SaleDataSet1();
             this.ordersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.point_Of_SaleDataSet = new Point_Of_Sale.Point_Of_SaleDataSet();
             this.ordersTableAdapter = new Point_Of_Sale.Point_Of_SaleDataSetTableAdapters.OrdersTableAdapter();
-            this.point_Of_SaleDataSet1 = new Point_Of_Sale.Point_Of_SaleDataSet1();
-            this.ordersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.ordersTableAdapter1 = new Point_Of_Sale.Point_Of_SaleDataSet1TableAdapters.OrdersTableAdapter();
-            this.orderIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productQuantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.Orders_vis)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.point_Of_SaleDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.point_Of_SaleDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.point_Of_SaleDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // Exit
@@ -100,21 +95,24 @@
             // Orders_vis
             // 
             this.Orders_vis.AllowUserToAddRows = false;
-            this.Orders_vis.AutoGenerateColumns = false;
             this.Orders_vis.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Orders_vis.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.orderIDDataGridViewTextBoxColumn,
-            this.productCodeDataGridViewTextBoxColumn,
-            this.productNameDataGridViewTextBoxColumn,
-            this.productPriceDataGridViewTextBoxColumn,
-            this.productQuantityDataGridViewTextBoxColumn});
-            this.Orders_vis.DataSource = this.ordersBindingSource1;
             this.Orders_vis.Location = new System.Drawing.Point(39, 92);
             this.Orders_vis.Name = "Orders_vis";
             this.Orders_vis.RowHeadersWidth = 51;
             this.Orders_vis.RowTemplate.Height = 24;
             this.Orders_vis.Size = new System.Drawing.Size(766, 230);
             this.Orders_vis.TabIndex = 5;
+            this.Orders_vis.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Orders_vis_CellContentClick);
+            // 
+            // ordersBindingSource1
+            // 
+            this.ordersBindingSource1.DataMember = "Orders";
+            this.ordersBindingSource1.DataSource = this.point_Of_SaleDataSet1;
+            // 
+            // point_Of_SaleDataSet1
+            // 
+            this.point_Of_SaleDataSet1.DataSetName = "Point_Of_SaleDataSet1";
+            this.point_Of_SaleDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ordersBindingSource
             // 
@@ -130,59 +128,9 @@
             // 
             this.ordersTableAdapter.ClearBeforeFill = true;
             // 
-            // point_Of_SaleDataSet1
-            // 
-            this.point_Of_SaleDataSet1.DataSetName = "Point_Of_SaleDataSet1";
-            this.point_Of_SaleDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // ordersBindingSource1
-            // 
-            this.ordersBindingSource1.DataMember = "Orders";
-            this.ordersBindingSource1.DataSource = this.point_Of_SaleDataSet1;
-            // 
             // ordersTableAdapter1
             // 
             this.ordersTableAdapter1.ClearBeforeFill = true;
-            // 
-            // orderIDDataGridViewTextBoxColumn
-            // 
-            this.orderIDDataGridViewTextBoxColumn.DataPropertyName = "OrderID";
-            this.orderIDDataGridViewTextBoxColumn.HeaderText = "OrderID";
-            this.orderIDDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.orderIDDataGridViewTextBoxColumn.Name = "orderIDDataGridViewTextBoxColumn";
-            this.orderIDDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // productCodeDataGridViewTextBoxColumn
-            // 
-            this.productCodeDataGridViewTextBoxColumn.DataPropertyName = "ProductCode";
-            this.productCodeDataGridViewTextBoxColumn.HeaderText = "ProductCode";
-            this.productCodeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.productCodeDataGridViewTextBoxColumn.Name = "productCodeDataGridViewTextBoxColumn";
-            this.productCodeDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // productNameDataGridViewTextBoxColumn
-            // 
-            this.productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
-            this.productNameDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // productPriceDataGridViewTextBoxColumn
-            // 
-            this.productPriceDataGridViewTextBoxColumn.DataPropertyName = "ProductPrice";
-            this.productPriceDataGridViewTextBoxColumn.HeaderText = "ProductPrice";
-            this.productPriceDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.productPriceDataGridViewTextBoxColumn.Name = "productPriceDataGridViewTextBoxColumn";
-            this.productPriceDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // productQuantityDataGridViewTextBoxColumn
-            // 
-            this.productQuantityDataGridViewTextBoxColumn.DataPropertyName = "ProductQuantity";
-            this.productQuantityDataGridViewTextBoxColumn.HeaderText = "ProductQuantity";
-            this.productQuantityDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.productQuantityDataGridViewTextBoxColumn.Name = "productQuantityDataGridViewTextBoxColumn";
-            this.productQuantityDataGridViewTextBoxColumn.Width = 125;
             // 
             // POS
             // 
@@ -202,10 +150,10 @@
             this.Text = "Point Of Sale";
             this.Load += new System.EventHandler(this.POS_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Orders_vis)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.point_Of_SaleDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.point_Of_SaleDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.point_Of_SaleDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,11 +173,6 @@
         private Point_Of_SaleDataSet1 point_Of_SaleDataSet1;
         private System.Windows.Forms.BindingSource ordersBindingSource1;
         private Point_Of_SaleDataSet1TableAdapters.OrdersTableAdapter ordersTableAdapter1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orderIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productCodeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productPriceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productQuantityDataGridViewTextBoxColumn;
     }
 }
 

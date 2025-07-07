@@ -13,6 +13,8 @@ namespace Point_Of_Sale
 {
     public partial class POS : Form
     {
+        SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Mohamed Furqan\\Documents\\GitHub\\Poimt-Of-Sale-System\\Point Of Sale\\Point Of Sale.mdf\";Integrated Security=True;Connect Timeout=30");
+
         public POS()
         {
             InitializeComponent();
@@ -20,10 +22,10 @@ namespace Point_Of_Sale
 
         private void POS_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'point_Of_SaleDataSet1.Orders' table. You can move, or remove it, as needed.
-            this.ordersTableAdapter1.Fill(this.point_Of_SaleDataSet1.Orders);
-            // TODO: This line of code loads data into the 'point_Of_SaleDataSet.Orders' table. You can move, or remove it, as needed.
-            this.ordersTableAdapter.Fill(this.point_Of_SaleDataSet.Orders);
+            //// TODO: This line of code loads data into the 'point_Of_SaleDataSet1.Orders' table. You can move, or remove it, as needed.
+            //this.ordersTableAdapter1.Fill(this.point_Of_SaleDataSet1.Orders);
+            //// TODO: This line of code loads data into the 'point_Of_SaleDataSet.Orders' table. You can move, or remove it, as needed.
+            //this.ordersTableAdapter.Fill(this.point_Of_SaleDataSet.Orders);
         }
 
         private void Barcode_KeyDown(object sender, KeyEventArgs e)
@@ -46,7 +48,6 @@ namespace Point_Of_Sale
 
         private void SearchCode(object sender, EventArgs e, int barcode) 
         {
-            SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Mohamed Furqan\\Documents\\GitHub\\Poimt-Of-Sale-System\\Point Of Sale\\Point Of Sale.mdf\";Integrated Security=True;Connect Timeout=30");
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
@@ -74,8 +75,23 @@ namespace Point_Of_Sale
             cmd2.CommandText = "INSERT INTO Orders (OrderID, ProductCode, ProductName, ProductPrice, ProductQuantity) VALUES('"+int.Parse(ProductID)+"', '"+int.Parse(ProductCode)+"', '"+ProductName+"', '"+int.Parse(ProductPrice)+"', 1)";
             cmd2.ExecuteNonQuery();
             con.Close();
+
+            LoadData();
             
             
+        }
+
+        private void LoadData()
+        {
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Orders", con);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            Orders_vis.DataSource = dt;
+        }
+
+        private void Orders_vis_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadData();
         }
     }
 }
