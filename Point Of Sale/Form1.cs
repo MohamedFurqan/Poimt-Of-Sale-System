@@ -26,6 +26,9 @@ namespace Point_Of_Sale
             //this.ordersTableAdapter1.Fill(this.point_Of_SaleDataSet1.Orders);
             //// TODO: This line of code loads data into the 'point_Of_SaleDataSet.Orders' table. You can move, or remove it, as needed.
             //this.ordersTableAdapter.Fill(this.point_Of_SaleDataSet.Orders);
+
+            LoadData();
+            TotalSum();
         }
 
         private void Barcode_KeyDown(object sender, KeyEventArgs e)
@@ -72,13 +75,53 @@ namespace Point_Of_Sale
             SqlCommand cmd2 = new SqlCommand();
             cmd2.Connection = con;
             cmd2.CommandType = CommandType.Text;
-            cmd2.CommandText = "INSERT INTO Orders (OrderID, ProductCode, ProductName, ProductPrice, ProductQuantity) VALUES('"+int.Parse(ProductID)+"', '"+int.Parse(ProductCode)+"', '"+ProductName+"', '"+int.Parse(ProductPrice)+"', 1)";
-            cmd2.ExecuteNonQuery();
+
+            try
+            {
+                cmd2.CommandText = "INSERT INTO Orders (OrderID, ProductCode, ProductName, ProductPrice, ProductQuantity) VALUES('" + int.Parse(ProductID) + "', '" + int.Parse(ProductCode) + "', '" + ProductName + "', '" + int.Parse(ProductPrice) + "', 1)";
+                cmd2.ExecuteNonQuery();
+                
+            }
+            catch (SqlException ex)
+            {
+                cmd2.CommandText = "UPDATE Orders SET ProductQuantity = ProductQuantity + 1 WHERE ProductCode = '"+barcode+"'";
+                SqlCommand cmd3 = new SqlCommand();
+                cmd3.Connection = con;
+                cmd3.CommandType = CommandType.Text;
+                cmd3.CommandText = "UPDATE Orders SET ProductPrice = ProductPrice + ProductPrice WHERE ProductCode = '"+barcode+"'";
+
+                cmd3.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
+                
+            }
+
             con.Close();
 
             LoadData();
+            TotalSum();
+
+
+        }
+
+        private void TotalSum()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT SUM(ProductPrice) FROM Orders";
             
-            
+            try
+            {
+                int total = (int)cmd.ExecuteScalar();
+                Total.Text = total.ToString();
+            }
+            catch (Exception ex)
+            {
+                Total.Text = "0";
+            }
+
+            con.Close();
         }
 
         private void LoadData()
@@ -91,7 +134,68 @@ namespace Point_Of_Sale
 
         private void Orders_vis_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            LoadData();
+            
+        }
+
+        private void Orders_vis_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            int orderId = Convert.ToInt32(e.Row.Cells["OrderID"].Value); 
+
+            DialogResult result = MessageBox.Show("Delete this record from the database?", "Confirm Delete", MessageBoxButtons.YesNo);
+            if (result != DialogResult.Yes)
+            {
+                e.Cancel = true; 
+                return;
+            }
+
+            try
+            {
+                if (con.State != ConnectionState.Open)
+                    con.Open();
+
+                SqlCommand cmd = new SqlCommand("DELETE FROM Orders WHERE OrderID = @OrderID", con);
+                cmd.Parameters.AddWithValue("@OrderID", orderId);
+                cmd.ExecuteNonQuery();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while deleting from database: " + ex.Message);
+                e.Cancel = true; 
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                    con.Close();
+            }
+            TotalSum();
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure? You want to Exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to reset the Menu?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "DELETE FROM Orders";
+                cmd.ExecuteNonQuery();
+                con.Close();
+                LoadData();
+            }
         }
     }
 }
