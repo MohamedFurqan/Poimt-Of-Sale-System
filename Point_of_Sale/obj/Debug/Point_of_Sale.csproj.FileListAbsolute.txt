@@ -1,0 +1,10 @@
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.csproj.AssemblyReference.cache
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.POS.resources
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.Properties.Resources.resources
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.csproj.GenerateResource.cache
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.csproj.CoreCompileInputs.cache
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\bin\Debug\Point_of_Sale.exe.config
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\bin\Debug\Point_of_Sale.exe
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\bin\Debug\Point_of_Sale.pdb
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.exe
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.pdb
