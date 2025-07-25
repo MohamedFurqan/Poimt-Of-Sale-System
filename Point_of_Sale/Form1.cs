@@ -28,23 +28,7 @@ namespace Point_of_Sale
             TotalSum();
         }
 
-        private void Barcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            int barcode = 0;
-            try
-            {
-                barcode = int.Parse(Barcode.Text);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Invalid Barcode");
-            }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                SearchCode(this, new EventArgs(), barcode);
-            }
-        }
+   
 
         private void SearchCode(object sender, EventArgs e, int barcode)
         {
@@ -52,7 +36,7 @@ namespace Point_of_Sale
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT * FROM Products WHERE ProductCode = '" + barcode + "'";
+            cmd.CommandText = "SELECT * FROM Product WHERE ProductCode = '" + barcode + "'";
             SqlDataReader re = cmd.ExecuteReader();
 
             string ProductID = "";
@@ -129,9 +113,50 @@ namespace Point_of_Sale
             Orders_vis.DataSource = dt;
         }
 
-        private void Orders_vis_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
+        private void Barcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            int barcode = 0;
+            try
+            {
+                barcode = int.Parse(Barcode.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid Barcode");
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchCode(this, new EventArgs(), barcode);
+            }
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure? You want to Exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to reset the Menu?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "DELETE FROM Orders";
+                cmd.ExecuteNonQuery();
+                con.Close();
+                LoadData();
+            }
         }
 
         private void Orders_vis_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -168,30 +193,29 @@ namespace Point_of_Sale
             TotalSum();
         }
 
-        private void Exit_Click(object sender, EventArgs e)
+        private void PaymentFun(object sender, EventArgs e, int payment)
         {
-            DialogResult result = MessageBox.Show("Are you sure? You want to Exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            int total = int.Parse(Total.Text);
+            String sumtotal = Convert.ToString(payment - total);
+            Change.Text = sumtotal;
+            Payment.Text = "";
         }
 
-        private void Clear_Click(object sender, EventArgs e)
+        private void Payment_KeyDown(object sender, KeyEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to reset the Menu?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            int payment = 0;
+            try
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "DELETE FROM Orders";
-                cmd.ExecuteNonQuery();
-                con.Close();
-                LoadData();
+                payment = int.Parse(Payment.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid Payment");
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                PaymentFun(this, new EventArgs(), payment);
             }
         }
     }

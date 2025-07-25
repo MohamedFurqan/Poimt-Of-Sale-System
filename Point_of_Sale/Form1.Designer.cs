@@ -1,4 +1,7 @@
-﻿namespace Point_of_Sale
+﻿using System;
+using System.Windows.Forms;
+
+namespace Point_of_Sale
 {
     partial class POS
     {
@@ -39,6 +42,7 @@
             this.Payment = new System.Windows.Forms.TextBox();
             this.Total = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.CloseBill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Orders_vis)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +55,8 @@
             this.Orders_vis.RowTemplate.Height = 24;
             this.Orders_vis.Size = new System.Drawing.Size(759, 258);
             this.Orders_vis.TabIndex = 0;
+            this.Orders_vis.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Orders_vis_CellContentClick);
+            this.Orders_vis.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.Orders_vis_UserDeletingRow);
             // 
             // Barcode
             // 
@@ -58,6 +64,7 @@
             this.Barcode.Name = "Barcode";
             this.Barcode.Size = new System.Drawing.Size(210, 22);
             this.Barcode.TabIndex = 1;
+            this.Barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Barcode_KeyDown);
             // 
             // Exit
             // 
@@ -67,6 +74,7 @@
             this.Exit.TabIndex = 2;
             this.Exit.Text = "Exit";
             this.Exit.UseVisualStyleBackColor = true;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // Clear
             // 
@@ -76,6 +84,7 @@
             this.Clear.TabIndex = 3;
             this.Clear.Text = "Clear";
             this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // button3
             // 
@@ -123,6 +132,7 @@
             this.Payment.Name = "Payment";
             this.Payment.Size = new System.Drawing.Size(157, 22);
             this.Payment.TabIndex = 14;
+            this.Payment.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Payment_KeyDown);
             // 
             // Total
             // 
@@ -145,11 +155,21 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Total";
             // 
+            // CloseBill
+            // 
+            this.CloseBill.Location = new System.Drawing.Point(848, 303);
+            this.CloseBill.Name = "CloseBill";
+            this.CloseBill.Size = new System.Drawing.Size(296, 37);
+            this.CloseBill.TabIndex = 18;
+            this.CloseBill.Text = "Close Bill";
+            this.CloseBill.UseVisualStyleBackColor = true;
+            // 
             // POS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1170, 450);
+            this.Controls.Add(this.CloseBill);
             this.Controls.Add(this.Change);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -170,6 +190,11 @@
 
         }
 
+        private void Orders_vis_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private System.Windows.Forms.DataGridView Orders_vis;
@@ -183,6 +208,7 @@
         private System.Windows.Forms.TextBox Payment;
         private System.Windows.Forms.Label Total;
         private System.Windows.Forms.Label label1;
+        private Button CloseBill;
     }
 }
 
