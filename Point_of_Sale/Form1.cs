@@ -14,7 +14,7 @@ namespace Point_of_Sale
 {
     public partial class POS : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-00FS4QN\\SQLEXPRESS;Initial Catalog=PointOfSale;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-88J2SRJ;Initial Catalog=Point_Of_Sale;Integrated Security=True;TrustServerCertificate=True");
 
         public POS()
         {
@@ -156,6 +156,7 @@ namespace Point_of_Sale
                 cmd.ExecuteNonQuery();
                 con.Close();
                 LoadData();
+                TotalSum();
             }
         }
 
@@ -178,6 +179,7 @@ namespace Point_of_Sale
                 SqlCommand cmd = new SqlCommand("DELETE FROM Orders WHERE OrderID = @OrderID", con);
                 cmd.Parameters.AddWithValue("@OrderID", orderId);
                 cmd.ExecuteNonQuery();
+
 
             }
             catch (Exception ex)

@@ -8,3 +8,4 @@ C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\bin\
 C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\bin\Debug\Point_of_Sale.pdb
 C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.exe
 C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.pdb
+C:\Users\Mohamed Furqan\Documents\GitHub\Poimt-Of-Sale-System\Point_of_Sale\obj\Debug\Point_of_Sale.exe.config

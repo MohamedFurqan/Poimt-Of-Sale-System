@@ -102,9 +102,9 @@ namespace Point_of_Sale
             this.Change.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.Change.Location = new System.Drawing.Point(427, 372);
             this.Change.Name = "Change";
-            this.Change.Size = new System.Drawing.Size(82, 24);
+            this.Change.Size = new System.Drawing.Size(21, 24);
             this.Change.TabIndex = 17;
-            this.Change.Text = "Change";
+            this.Change.Text = "0";
             // 
             // label4
             // 
